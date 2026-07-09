@@ -1,0 +1,11 @@
+{
+  "// note": "Kiro is a VS Code fork, so these settings apply. They stop the editor from flagging Tailwind's @tailwind/@apply directives as errors and turn on class autocomplete.",
+  "css.lint.unknownAtRules": "ignore",
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ]
+}

@@ -1,0 +1,184 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Theme modeled on humorphism.com — warm "paper" light mode, a single hot
+ * orange accent (#ff6200), near-black ink, hairline warm-gray borders.
+ * Values are pulled from humorphism.com's own design tokens.
+ *
+ * Note: the brand typefaces can't ship in a public repo, so we use the native
+ * system font stack instead: explicit platform faces first (-apple-system / SF
+ * on macOS, Segoe UI on Windows, Roboto on Android/ChromeOS) with system-ui and
+ * Helvetica/Arial as fallbacks. Zero downloads, always present (kind to event
+ * WiFi), and it looks native on every machine.
+ */
+
+:root {
+  --radius: 0.5rem;
+
+  --background: #faf9f7; /* paper */
+  --foreground: #1b1a18; /* ink */
+
+  --card: #ffffff;
+  --card-foreground: #1b1a18;
+
+  --popover: #ffffff;
+  --popover-foreground: #1b1a18;
+
+  /*
+   * --primary is near-black ink, like shadcn's default AND like humorphism.com
+   * itself, where orange is a *sparing* accent — not the primary surface color.
+   * This keeps buttons / bubbles / emphasis calm and neutral. Reach for the
+   * orange deliberately via `--fuego-*` (or bg-fuego-500, text-primary is ink).
+   */
+  --primary: #1b1a18; /* ink */
+  --primary-foreground: #faf9f7;
+
+  --secondary: #f5f3ef;
+  --secondary-foreground: #1b1a18;
+
+  --muted: #f5f3ef;
+  --muted-foreground: #57544d;
+
+  --accent: #ece9e4;
+  --accent-foreground: #1b1a18;
+
+  --destructive: #ff3340;
+  --destructive-foreground: #ffffff;
+
+  --border: #ece9e4; /* hairline */
+  --input: #e2dfda;
+  --ring: #ff6200; /* focus ring stays the fuego accent */
+
+  /* Fuego "smile" accent ramp, centered on #ff6200. Use for deliberate
+     highlights (bg-fuego-500, text-fuego-600, etc.) — NOT as primary. */
+  --fuego-50: #fff4ed;
+  --fuego-100: #ffe4d3;
+  --fuego-200: #ffc4a0;
+  --fuego-300: #ff9d63;
+  --fuego-400: #ff8038;
+  --fuego-500: #ff6200;
+  --fuego-600: #e04e00;
+  --fuego-700: #c44e00;
+  --fuego-800: #9c3d00;
+  --fuego-900: #7a3005;
+}
+
+/*
+ * Dark ("night mode") is an option, NOT the default. humorphism.com is a
+ * light, paper-first design. Add the `dark` class on <html> only if you
+ * deliberately want the night variant.
+ */
+.dark {
+  --background: #121110;
+  --foreground: #faf9f7;
+  --card: #1b1a18;
+  --card-foreground: #faf9f7;
+  --popover: #1b1a18;
+  --popover-foreground: #faf9f7;
+  --primary: #faf9f7; /* light ink in dark mode (matches shadcn default) */
+  --primary-foreground: #1b1a18;
+  --secondary: #2a2823;
+  --secondary-foreground: #faf9f7;
+  --muted: #2a2823;
+  --muted-foreground: #adaaa3;
+  --accent: #322f29;
+  --accent-foreground: #faf9f7;
+  --destructive: #ff5a55;
+  --destructive-foreground: #faf9f7;
+  --border: #322f29;
+  --input: #322f29;
+  --ring: #ff7a26;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-fuego-50: var(--fuego-50);
+  --color-fuego-100: var(--fuego-100);
+  --color-fuego-200: var(--fuego-200);
+  --color-fuego-300: var(--fuego-300);
+  --color-fuego-400: var(--fuego-400);
+  --color-fuego-500: var(--fuego-500);
+  --color-fuego-600: var(--fuego-600);
+  --color-fuego-700: var(--fuego-700);
+  --color-fuego-800: var(--fuego-800);
+  --color-fuego-900: var(--fuego-900);
+
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui,
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui,
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+/*
+ * Fuego "smile" thermal gradient — pink → orange → teal → blue, the same
+ * chromatic palette as the wordmark. Use as a background fill for deliberate
+ * accents (e.g. the primary hero button).
+ */
+@utility bg-thermal {
+  background-image: linear-gradient(
+    100deg,
+    #ff9d8a 0%,
+    #ff6200 28%,
+    #6fae9c 60%,
+    #7aa7d8 100%
+  );
+}
+
+/* "Just Need Your Input" — shimmer gradient used by the shimmer animation utility. */
+.fuego-shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--muted) 30%,
+    color-mix(in oklab, var(--primary) 25%, transparent) 50%,
+    var(--muted) 70%
+  );
+  background-size: 200% 100%;
+}
