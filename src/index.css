@@ -182,3 +182,75 @@
   );
   background-size: 200% 100%;
 }
+
+/* ─────────────────────────────────────────────────────────────
+   Neumorphic design tokens — hospital family status app
+   Soft, calm palette that works alongside the existing theme.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  /* Neumorphic surface — slightly cooler than the default paper */
+  --neu-bg: #e8edf2;
+  --neu-shadow-light: #ffffff;
+  --neu-shadow-dark: #c5cdd8;
+
+  /* Status colours — warm, non-alarming, WCAG AA on --neu-bg */
+  --neu-status-prep:     #7aa7d8; /* preparing — calm blue */
+  --neu-status-surgery:  #4a90d9; /* in surgery — trust blue */
+  --neu-status-closing:  #6fae9c; /* closing — teal calm */
+  --neu-status-recovery: #5ba85e; /* recovery — green hope */
+  --neu-status-attention:#d97a4a; /* attention — warm amber */
+  --neu-status-complete: #3d8f5f; /* complete — deep green */
+  --neu-status-waiting:  #9aa5b4; /* waiting — neutral gray */
+
+  /* TalkToMe chat surface */
+  --neu-chat-bg: #eef2f6;
+  --neu-chat-agent-bubble: #dde6f0;
+  --neu-chat-user-bubble: #4a90d9;
+}
+
+/* Neumorphic raised card — element appears to float up from surface */
+@utility neu-raised {
+  background: var(--neu-bg);
+  box-shadow:
+    6px 6px 14px var(--neu-shadow-dark),
+    -6px -6px 14px var(--neu-shadow-light);
+  border-radius: 1rem;
+  border: none;
+}
+
+/* Neumorphic pressed / inset — element appears pushed into the surface */
+@utility neu-inset {
+  background: var(--neu-bg);
+  box-shadow:
+    inset 4px 4px 10px var(--neu-shadow-dark),
+    inset -4px -4px 10px var(--neu-shadow-light);
+  border-radius: 1rem;
+  border: none;
+}
+
+/* Neumorphic button — raised, interactive */
+@utility neu-button {
+  background: var(--neu-bg);
+  box-shadow:
+    4px 4px 10px var(--neu-shadow-dark),
+    -4px -4px 10px var(--neu-shadow-light);
+  border-radius: 0.75rem;
+  border: none;
+  transition: box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+@utility neu-button-active {
+  box-shadow:
+    inset 3px 3px 8px var(--neu-shadow-dark),
+    inset -3px -3px 8px var(--neu-shadow-light);
+  transform: scale(0.98);
+}
+
+/* Status pill colours */
+@utility neu-status-prep     { background: var(--neu-status-prep); }
+@utility neu-status-surgery  { background: var(--neu-status-surgery); }
+@utility neu-status-closing  { background: var(--neu-status-closing); }
+@utility neu-status-recovery { background: var(--neu-status-recovery); }
+@utility neu-status-attention{ background: var(--neu-status-attention); }
+@utility neu-status-complete { background: var(--neu-status-complete); }
+@utility neu-status-waiting  { background: var(--neu-status-waiting); }
